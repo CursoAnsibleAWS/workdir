@@ -1,0 +1,19 @@
+- name: Mi primer jugada
+  remote_user: admin
+  hosts: webservers
+  become: yes
+  become_method: sudo
+  become_user: webmaster
+  gather_facts: False
+
+  tasks:
+    - name: Copiar archivos
+      ansible.builtin.copy:
+        src: myfile
+        dest: /tmp/myfile
+
+    - name: Reiniciar apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+

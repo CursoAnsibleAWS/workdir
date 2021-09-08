@@ -1,0 +1,20 @@
+- name: Mi primer jugada
+  hosts: webservers
+  gather_facts: False
+
+  tasks:
+    - name: Instalar apache
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: Copiar archivos
+      ansible.builtin.copy:
+        src: myfile
+        dest: /var/www/html/index.html
+
+    - name: Reiniciar apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+
