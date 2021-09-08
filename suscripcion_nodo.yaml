@@ -1,0 +1,23 @@
+- name: Suscripcion de nodos administrados
+  hosts: webservers
+  gather_facts: False
+
+  tasks:
+    - name: Incluye el archivo de variables
+      include_vars: vars/variables.yaml
+
+    - name: Instalar subscription-manager
+      ansible.builtin.yum:
+        name: subscription-manager
+        state: latest
+
+    - name: Registrar como usuario con contraseña y auto-suscribirse a los contenidos disponibles
+      redhat_subscription:
+        state: present
+        username: "{{ username }}"
+        password: "{{ password }}"
+        server_insecure: True
+        auto_attach: True
+        syspurpose:
+          service_level_agreement: "Self-Support"
+
