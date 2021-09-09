@@ -1,0 +1,5 @@
+---
+- name: Configurar balanceador
+  hosts: lb
+  roles:
+    - role: mylb
