@@ -1,0 +1,5 @@
+---
+- name: Instala y configura el webserver
+  hosts: webservers
+  roles:
+    - myapache
